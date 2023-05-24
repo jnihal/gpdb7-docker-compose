@@ -9,6 +9,7 @@ services:
 # ==================================================
   cdw:
     image: gpdb7-multinode-cluster/gpdb-image
+    restart: always
     hostname: cdw
     tty: true
     networks:
@@ -16,26 +17,43 @@ services:
     volumes:
       - gpdb-src-volume:/gpdb-src
       - gpdb-scripts-volume:/gpdb-scripts
+      - gpdb-rpm-volume:/gpdb-rpm
 
   sdw1:
     hostname: sdw1
     image: gpdb7-multinode-cluster/gpdb-image
+    restart: always
     tty: true
     networks:
       - the-network
     volumes:
       - gpdb-src-volume:/gpdb-src
       - gpdb-scripts-volume:/gpdb-scripts
+      - gpdb-rpm-volume:/gpdb-rpm
 
   sdw2:
     hostname: sdw2
     image: gpdb7-multinode-cluster/gpdb-image
+    restart: always
     tty: true
     networks:
       - the-network
     volumes:
       - gpdb-src-volume:/gpdb-src
       - gpdb-scripts-volume:/gpdb-scripts
+      - gpdb-rpm-volume:/gpdb-rpm
+
+  sdw3:
+    hostname: sdw3
+    image: gpdb7-multinode-cluster/gpdb-image
+    restart: always
+    tty: true
+    networks:
+      - the-network
+    volumes:
+      - gpdb-src-volume:/gpdb-src
+      - gpdb-scripts-volume:/gpdb-scripts
+      - gpdb-rpm-volume:/gpdb-rpm
 
 # The network that bridges all the containers
 networks:
@@ -54,3 +72,9 @@ volumes:
       o: bind
       type: none
       device: ${PWD}/scripts
+  
+  gpdb-rpm-volume:
+    driver_opts:
+      o: bind
+      type: none
+      device: ${GPDB_RPM:-/tmp}

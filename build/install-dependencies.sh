@@ -1,8 +1,7 @@
 #! /bin/bash
 
 yum install -y epel-release
-yum install -y emacs-nox net-tools openssh-server openssh-clients python3-devel
-yum install -y python3-pip
+yum install -y emacs-nox net-tools openssh-server openssh-clients passwd iproute procps vim go
 
 pip3 install psutil==5.7.0 pyyaml==5.3.1
 

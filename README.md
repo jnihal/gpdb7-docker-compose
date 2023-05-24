@@ -5,7 +5,7 @@ multinode cluster for dev testing. This can be useful when there is a
 need to have multiple hosts and the single-node gpdemo cluster is
 insufficient. The docker compose GPDB 7 cluster is ephemeral so the
 cluster can be discarded and rebuilt for quick and clean testing. The
-OS of choice here is CentOS 7.
+OS of choice here is Rocky Linux 8.
 
 ## Build the image
 
@@ -24,7 +24,7 @@ to the build directory). The image is stored locally.
 
 ## Set environment variables
 
-The `docker-compose.yaml` uses two environment variables:
+The `docker-compose.yaml` uses three environment variables:
 1. `$GPDB7_SRC` (the path to your GPDB 7X source code)
 ```
 Example:
@@ -37,6 +37,10 @@ anything (e.g. MacOS compiled binaries).
 2. `$PWD` (the path to the top-level dir of this repository)
 Note: You have to run `docker-compose` in the top-level dir anyways so
 `$PWD` should always be correct.
+
+3. `$GPDB_RPM` (the path to the GPDB RPM directory)
+Note: This is optional and required only if you want to install GPDB using
+an RPM instead of compiling it from source
 
 ## Run docker compose
 
@@ -60,11 +64,21 @@ bash coordinate-everything.sh
 popd
 ```
 
+Alternatively, you can also use GPDB RPM to install GPDB. You would need
+to set the `$GPDB_RPM` environment variable to the directory
+where the RPM is located.
+
+```
+pushd ./scripts/
+bash coordinate-everything.sh rpm
+popd
+```
+
 Afterwards, you'll be able to connect to the coordinator node and
 start your testing.
 
 ```
-docker exec -it gpdb7-docker-compose_cdw_1 /bin/bash
+docker exec -it gpdb7-docker-compose-cdw-1 /bin/bash
 su - gpadmin
 source env.sh
 ```
