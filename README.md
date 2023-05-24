@@ -5,7 +5,7 @@ multinode cluster for dev testing. This can be useful when there is a
 need to have multiple hosts and the single-node gpdemo cluster is
 insufficient. The docker compose GPDB 7 cluster is ephemeral so the
 cluster can be discarded and rebuilt for quick and clean testing. The
-OS of choice here is CentOS 7.
+OS of choice here is Rocky Linux 8.
 
 ## Build the image
 
@@ -57,6 +57,16 @@ gpinitsystem to create the GPDB 7X cluster.
 ```
 pushd ./scripts/
 bash coordinate-everything.sh
+popd
+```
+
+Alternatively, you can also use GPDB RPM to install GPDB. You would need
+to set the `$GPDB_RPM` environment variable to the directory
+where the RPM is located.
+
+```
+pushd ./scripts/
+bash coordinate-everything.sh rpm
 popd
 ```
 
