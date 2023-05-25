@@ -13,6 +13,9 @@ OS of choice here is Rocky Linux 8.
 Podman is a container engine with the same command-line interface (CLI) as Docker.
 Pretty much every command you can run from the Docker command line you can execute with Podman.
 
+Using Podman, we can run the docker containers with systemd with minimal effort using the same
+Dockerfile and docker-compose.yml files.
+
 For Mac, Podman is provided through Homebrew.
 
 ```
