@@ -58,6 +58,10 @@ docker-compose up -d
 This step will install the compiled GPDB 7 onto each host and run
 gpinitsystem to create the GPDB 7X cluster.
 
+
+Note: For Ubuntu machines, the docker container names are created with "_" instead of "-".
+Please update the .sh file and change the name of the containers accordingly.
+
 ```
 pushd ./scripts/
 bash coordinate-everything.sh
